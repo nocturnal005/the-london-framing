@@ -1,0 +1,180 @@
+:root {
+    --bg-wall: #1a1c23; /* Dark cinematic wall */
+    --sidebar-bg: rgba(26, 28, 35, 0.85); /* Glassmorphism */
+    --text-primary: #ffffff;
+    --text-secondary: #a0a4b8;
+    --accent: #d4af37; /* Gold accent */
+    
+    /* Configurator State Variables (updated by JS) */
+    --frame-thickness: 30px;
+    --mount-thickness: 60px;
+    --mount-color: #ffffff;
+    --frame-texture: url('../assets/texture-oak.svg');
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    background-color: #000;
+    color: var(--text-primary);
+    overflow: hidden; /* App-like feel */
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- VISUALIZER AREA --- */
+.visualizer-area {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #2a2d39 0%, var(--bg-wall) 100%);
+    padding: 40px;
+}
+
+/* The CSS Compositing Magic */
+.frame-container {
+    /* The frame is generated using border-image so the texture wraps the edge */
+    border-style: solid;
+    border-width: var(--frame-thickness);
+    border-image-source: var(--frame-texture);
+    border-image-slice: 40; /* Adjust based on texture */
+    border-image-repeat: stretch;
+    
+    /* Heavy cinematic drop shadow */
+    box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.5);
+    transition: border-width 0.3s ease;
+}
+
+.mount-container {
+    background-color: var(--mount-color);
+    padding: var(--mount-thickness);
+    /* Inset shadow to give the mount a cut/beveled edge look */
+    box-shadow: inset 0 3px 10px rgba(0,0,0,0.15);
+    transition: padding 0.3s ease, background-color 0.3s ease;
+}
+
+#artwork-image {
+    display: block;
+    max-width: 60vw;
+    max-height: 70vh;
+    object-fit: contain;
+    /* Subtle shadow on the art itself */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* --- SIDEBAR --- */
+.configurator-sidebar {
+    width: 400px;
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.sidebar-header h1 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.sidebar-header p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.control-group h3 {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/* Custom File Upload Button */
+.upload-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.upload-btn:hover { background: rgba(255,255,255,0.1); }
+.upload-btn input[type="file"] { display: none; }
+
+/* Texture & Color Selectors */
+.texture-selector, .color-selector {
+    display: flex;
+    gap: 15px;
+}
+
+.texture-btn, .color-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.texture-btn.active, .color-btn.active {
+    border-color: var(--accent);
+    transform: scale(1.1);
+}
+
+.texture-btn.oak { background: url('../assets/texture-oak.svg') center/cover; }
+.texture-btn.black { background: url('../assets/texture-black.svg') center/cover; }
+.texture-btn.gold { background: url('../assets/texture-gold.svg') center/cover; }
+
+/* Sliders */
+input[type="range"] {
+    width: 100%;
+    margin-bottom: 5px;
+    accent-color: var(--accent);
+}
+.value-display {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    float: right;
+}
+
+/* CTA */
+.cta-section {
+    margin-top: auto;
+}
+.primary-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: filter 0.2s;
+}
+.primary-btn:hover { filter: brightness(1.1); }
