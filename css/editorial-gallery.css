@@ -1,0 +1,217 @@
+:root {
+    --text-primary: #3b352c;
+    --text-secondary: #7a7061;
+    --bg-color: #f6f3eb;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --transition-standard: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background-color: var(--bg-color);
+    background-image: linear-gradient(to right, rgba(246, 243, 235, 0.9) 0%, rgba(246, 243, 235, 0.3) 100%), url('../assets/editorial-gallery-bg.png');
+    background-size: cover;
+    background-position: center right;
+    background-attachment: fixed;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: var(--transition-standard);
+}
+
+/* Header Styles */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 5rem;
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 80px; 
+    width: auto; 
+    transform: scale(1.1); 
+    transform-origin: left center;
+    filter: invert(0.8) sepia(0.3) hue-rotate(-30deg) saturate(2); /* makes it brownish to match */
+}
+
+.main-nav {
+    display: flex;
+    gap: 3.5rem;
+}
+
+.main-nav a {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    color: var(--text-secondary);
+    position: relative;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--text-primary);
+}
+
+.main-nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-primary);
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background-color: var(--text-primary);
+    transition: width 0.4s ease;
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Hero Section */
+.hero-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0 5rem;
+    position: relative;
+    z-index: 5;
+    width: 55%;
+}
+
+.hero-tag {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeRight 1s ease forwards;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    opacity: 0;
+    animation: fadeRight 1s ease 0.2s forwards;
+}
+
+.hero-title i {
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.explore-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0;
+    border-bottom: 1px solid var(--text-primary);
+    padding-bottom: 5px;
+    animation: fadeRight 1s ease 0.4s forwards;
+}
+
+/* Footer Overlay */
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    position: relative;
+    z-index: 10;
+}
+
+.social-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.social-links a:hover {
+    color: var(--text-primary);
+}
+
+.legal-links a:hover {
+    color: var(--text-primary);
+}
+
+/* Animations */
+@keyframes fadeRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
